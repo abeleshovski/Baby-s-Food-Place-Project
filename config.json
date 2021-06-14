@@ -1,0 +1,19 @@
+{
+    "database": {
+        "host": "recipe.wdqme.mongodb.net",
+        "port": 27017,
+        "username": "dev",
+        "password": "cunt",
+        "dbname": "myFirstDatabase"
+    },
+    "auth": {
+        "jwt_key": "secretkey"
+    },
+    "ports": {
+        "auth": 9001,
+        "recipes": 9002,
+        "proxy": 9000,
+        "storage": 9003,
+        "misc": 9004
+    }
+}

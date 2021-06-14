@@ -1,0 +1,15 @@
+await fetch(storageUrl, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Success:", result);
+        
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
