@@ -65,7 +65,7 @@ module.exports = {
       };
 
       const token = jwt.sign(payload, config.get("auth").jwt_key, {
-        expiresIn: "24h",
+        expiresIn: "30m",
       });
 
       res.cookie("token", token).send({
@@ -96,20 +96,5 @@ module.exports = {
       message: "JWT successfully refreshed",
       token,
     });
-  },
-  fetchOne: async (req, res) => {
-    try {
-      const user = await User.findById(req.params.id);
-
-      res.status(200).send({
-        error: false,
-        message: `User #${user.id}'s recipes fetched`,
-      });
-    } catch (error) {
-      res.status(400).send({
-        error: true,
-        messege: error,
-      });
-    }
   },
 };

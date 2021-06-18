@@ -21,7 +21,18 @@ const recipeSchema = mongoose.Schema({
     type: String,
     required: ["Must have a description"],
   },
-  fileName: {
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
+  userId: {
+    type: String,
+  },
+  imageName: {
     type: String,
   },
 });

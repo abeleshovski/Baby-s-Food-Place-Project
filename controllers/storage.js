@@ -7,7 +7,7 @@ module.exports = {
       __dirname,
       "..",
       "uploads",
-      req.recipe.id
+      req.params.id
     );
 
     if (!fs.existsSync(`${storageDirectory}/${req.params.filename}`)) {
@@ -52,15 +52,10 @@ module.exports = {
 
     file.mv(`${storageDirectory}/${fileName}`);
 
-    const payload = {
-      recipefileName: fileName,
-    };
-
-    console.log(fileName);
     res.status(201).send({
       error: false,
       message: `File is uploaded successfully!`,
-      payload: payload.recipefileName,
+      fileName: fileName,
     });
   },
   delete: (req, res) => {

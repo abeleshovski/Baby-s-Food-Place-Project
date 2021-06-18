@@ -26,6 +26,15 @@ app.use(
 );
 
 app.use(
+  "/api/misc",
+  proxy(`http://localhost:${config.get("ports").misc}`, {
+    proxyReqPathResolver: (req) => {
+      return `http://localhost:${config.get("ports").misc}/api/misc${req.url}`;
+    },
+  })
+);
+
+app.use(
   "/api/storage",
   proxy(`http://localhost:${config.get("ports").storage}`, {
     proxyReqPathResolver: (req) => {

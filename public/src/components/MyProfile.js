@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContextProvider";
 import Cookies from "universal-cookie";
 
@@ -14,14 +14,35 @@ export function MyProfile() {
   const cookies = new Cookies();
   const id = cookies.get("id");
 
-  const url = `http://${process.env.REACT_APP_API_URL}/myprofile/${id}`;
+  const fetchUrl = `http://${process.env.REACT_APP_API_URL}/recipes/users/${id}`;
+  const updateUrl = `http://${process.env.REACT_APP_API_URL}/recipes/update/${id}`;
+
+  useEffect(() => {
+    fetch(fetchUrl, {
+      headers: {
+        Authorization: `Bearer ${cookies.get("token")}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setFirstName(data.user.firstName);
+        setlastName(data.user.lastName);
+        setEmail(data.user.email);
+        setDOB(data.user.DOB.slice(0, 10));
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(url, {
+    fetch(updateUrl, {
       credentials: "same-origin",
       method: "post",
       headers: {
+        Authorization: `Bearer ${cookies.get("token")}`,
         "Access-Control-Allow-Origin": "*",
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -44,7 +65,8 @@ export function MyProfile() {
         if (data.error) {
           alert(data.message);
         } else {
-          alert(data);
+          alert("we guchi");
+          console.log(data);
         }
       })
       .catch((error) => {

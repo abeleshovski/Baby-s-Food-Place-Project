@@ -11,7 +11,7 @@ api.use(express.json());
 api.use(
   jwt({
     secret: config.get("auth").jwt_key,
-    algorithms: ["HS226"],
+    algorithms: ["HS256"],
   }).unless({
     path: ["/api/auth/register", "/api/auth/login"],
   })

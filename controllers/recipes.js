@@ -1,5 +1,7 @@
 const Recipes = require("../models/recipe");
 const User = require("../models/user");
+const mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
 
 module.exports = {
   post: async (req, res) => {
@@ -7,7 +9,6 @@ module.exports = {
       let recipe = {
         ...req.body,
         userId: req.user.id,
-        userFullName: req.user.fullName,
       };
       await Recipes.create(recipe);
       res.status(200).send({
@@ -40,7 +41,7 @@ module.exports = {
   fetchOne: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
-      const recipe = await Recipes.find();
+      const recipe = await Recipes.find({ userId: req.params.id });
 
       res.status(200).send({
         error: false,
@@ -53,5 +54,75 @@ module.exports = {
         messege: error,
       });
     }
+  },
+  likeRecipe: async (req, res) => {
+    try {
+      const likeCounter = await Recipes.findById(req.params.id);
+      const recipe = await Recipes.findByIdAndUpdate(
+        req.params.id,
+        { likes: likeCounter.likes + 1 },
+        { new: true }
+      );
+      res.status(201).send({
+        error: false,
+        message: `Recipe with id ${req.params.id} liked`,
+        recipe,
+      });
+    } catch (err) {
+      res.status(500).send({
+        error: true,
+        message: err,
+      });
+    }
+  },
+  postUpdate: async (req, res) => {
+    try {
+      if (
+        !req.body.password ||
+        req.body.password != req.body.confirmation_password
+      ) {
+        return res.status(400).send({
+          error: true,
+          message: "Bad request. Passwords do not match.",
+        });
+      }
+      const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+        context: "query",
+      });
+
+      res.status(201).send({
+        messege: "success",
+        error: false,
+        user,
+      });
+    } catch (error) {
+      res.status(400).send({
+        messege: error,
+        error: true,
+      });
+    }
+  },
+  fetchAllUsers: async (req, res) => {
+    // assume try catch
+    const users = await User.find();
+
+    res.status(200).send({
+      error: false,
+      message: "All users are fetched",
+      users,
+    });
+  },
+  fetchOneUser: async (req, res) => {
+    // assume try catch
+    const user = await User.findById(req.params.id);
+
+    res.status(200).send({
+      error: false,
+      message: `User with id #${req.params.id} fetched`,
+      user,
+      //recipe
+    });
   },
 };

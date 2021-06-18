@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(228, 230, 230);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  height: 60px;
+}
+
+.navbar-links ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar span {
+  color: orange;
+}
+
+.navbar-links li {
+  list-style: none;
+}
+.navbar-links li a {
+  text-decoration: none;
+  color: grey;
+  padding: 3px;
+}
+
+.navbar-links ul li:hover {
+  cursor: pointer;
+}
+
+.logo_color {
+  width: 120px;
+  height: 80px;
+}
+
+.btnLogIn {
+  width: 80px;
+  height: 25px;
+  border: 1px solid gray;
+  background-color: rgb(228, 230, 230);
+  color: grey;
+}
+
+.btnMyRecipe {
+  color: green;
+  text-decoration: none;
+  border-bottom: 2px solid grey;
+}
+
+.btnMyProfile {
+  color: orange;
+  text-decoration: none;
+  border-bottom: 2px solid gray;
+}
+
+.condition {
+  display: flex;
+}
+
+.condition span {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+li {
+  list-style: none;
+  padding: 5px;
+}
+
+.btnCreateAcc {
+  width: 140px;
+  height: 25px;
+  border: 1px solid gray;
+  background-color: green;
+  color: white;
+}
+
+.btnLogIn:hover {
+  cursor: pointer;
+}
+
+.btn-createAcc:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 400px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+  }
+}

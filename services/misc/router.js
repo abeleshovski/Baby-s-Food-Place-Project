@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const controller = require("../../controllers/recipes");
+const controller = require("../../controllers/frontPage.js");
 
-router.get("/", controller.fetchAll).get("/:id", controller.fetchOne);
+router.get("/fresh/", controller.fresh).get("/popular/", controller.popular);
 module.exports = router;

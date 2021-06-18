@@ -3,7 +3,7 @@ const router = express.Router();
 const controller = require("../../controllers/storage");
 
 router
-  .get("/:filename", controller.fetch)
+  .get("/:id/:filename", controller.fetch)
   .post("/new", controller.upload)
   .delete("/delete/:filename", controller.delete);
 

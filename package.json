@@ -9,7 +9,8 @@
     "recipes": "nodemon services/recipes/index.js",
     "proxy": "nodemon services/proxy/index.js",
     "storage": "nodemon services/storage/index.js",
-    "start": "concurrently \"npm run auth\" \"npm run recipes\" \"npm run proxy\" \"npm run storage\"",
+    "nonauth" : "nodemon services/misc/index.js",
+    "start": "concurrently \"npm run auth\" \"npm run recipes\" \"npm run proxy\" \"npm run storage\" \"npm run nonauth\"",
     "dev": ""
   },
   "author": "",

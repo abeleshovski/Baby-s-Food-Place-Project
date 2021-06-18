@@ -1,16 +1,16 @@
 import React from "react";
 
-export const ListOfRecipes = (props) => {
-  const recipesList = props.recipes ? (
+export const ListOfAllRecipes = (props) => {
+  const recipesList = props.recipes.length ? (
     props.recipes.map((recipe, id) => {
       return (
         <div className="collection-item" key={id}>
-          <span>{recipe.title}</span>
+          <span>{recipe.title} </span>
         </div>
       );
     })
   ) : (
-    <p className="center"></p>
+    <p>There seem to be no recipes atm</p>
   );
   return <div className="recipes collection">{recipesList}</div>;
 };

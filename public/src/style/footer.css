@@ -1,0 +1,46 @@
+.footer {
+  bottom: 0px;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(72, 69, 69);
+  color: white;
+  height: 100px;
+}
+
+.footer-second {
+  display: flex;
+  align-items: center;
+}
+
+.footer-second ul {
+  margin: 0;
+  right: 50px;
+  padding: 0;
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.footer-second ul li:hover {
+  cursor: pointer;
+}
+
+.footer-second li {
+  list-style: none;
+  padding: 3px;
+}
+
+.footer-second li a {
+  text-decoration: none;
+  color: white;
+  display: block;
+}
+
+.logo_white {
+  left: 100px;
+  margin: 0;
+  position: absolute;
+}

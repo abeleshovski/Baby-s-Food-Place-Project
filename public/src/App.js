@@ -1,5 +1,5 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { Nav } from "./components/Nav";
 import { Home } from "./components/Home";
 import { Register } from "./components/Register";
@@ -9,36 +9,41 @@ import { MyProfile } from "./components/MyProfile";
 import Cookies from "universal-cookie";
 import { MyRecipes } from "./components/MyRecipes";
 import { CreateRecipe } from "./components/CreateRecipe";
+import { Footer } from "./components/Footer";
 
 export default function App() {
   const cookies = new Cookies();
   const token = cookies.get("token");
-  const id = cookies.get("id");
 
-  function parseJwt(token) {
-    if (!token) {
-      return;
-    }
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-    return JSON.parse(window.atob(base64));
-  }
+  const refresh = `http://${process.env.REACT_APP_API_URL}/auth/refresh-token`;
 
-  console.log(parseJwt(token));
+  useEffect(() => {
+    fetch(refresh, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => cookies.set("token", data.token, { path: "/" }));
+  }, []);
 
-  console.log(id);
-  // console.log(token)
   return (
     <AuthContextProvider>
       <Nav />
-      <Switch>
-        <Route path="/home" component={Home}></Route>
-        <Route path="/register" component={Register}></Route>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/myprofile" component={MyProfile}></Route>
-        <Route path="/myrecipes" component={MyRecipes} />
-        <Route path="/newrecipe" component={CreateRecipe} />
-      </Switch>
+      {/* <Redirect from="/" to="/home"></Redirect> */}
+      <div className="container">
+        <Switch>
+          <Route path="/home" component={Home}></Route>
+          <Route path="/register" component={Register}></Route>
+          <Route path="/login" component={Login}></Route>
+          <Route path="/myprofile" component={MyProfile}></Route>
+          <Route path="/myrecipes" component={MyRecipes} />
+          <Route path="/newrecipe" component={CreateRecipe} />
+        </Switch>
+      </div>
+      <Footer />
     </AuthContextProvider>
   );
 }

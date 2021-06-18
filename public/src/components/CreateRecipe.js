@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Cookies from "universal-cookie";
-import FormData from "form-data";
-
+import axios from "axios";
 export const CreateRecipe = () => {
   const recipeUrl = `http://${process.env.REACT_APP_API_URL}/recipes/newRecipe`;
   const storageUrl = `http://${process.env.REACT_APP_API_URL}/storage/new`;
@@ -10,47 +9,92 @@ export const CreateRecipe = () => {
   const token = cookies.get("token");
 
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("breakfast");
   const [prepTime, setPrepTime] = useState("");
   const [numberOfPeople, setNumberOfPeople] = useState("");
   const [description, setDescription] = useState("");
-
+  const [imageName, setImageName] = useState("");
   const [selectedFile, setSelectedFile] = useState();
+
   const changeHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
+    const image = event.target.files[0];
+    setSelectedFile(image);
+    console.log(image);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const image = selectedFile;
     const formData = new FormData();
-    console.log(category);
-    formData.append("image", selectedFile);
-    fetch(recipeUrl, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: title,
-        category: category,
-        prepTime: prepTime,
-        numberOfPeople: numberOfPeople,
-        description: description,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          alert(data.message);
-        } else console.log(data);
+    formData.append("image", image);
+    axios
+      .post(storageUrl, formData, {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        setImageName(response.data.fileName);
+        fetch(recipeUrl, {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: title,
+            category: category,
+            prepTime: prepTime,
+            numberOfPeople: numberOfPeople,
+            description: description,
+            imageName: response.data.fileName,
+          }),
+        })
+          .then((res) => res.json())
+          .then((info) => {
+            if (info.error) {
+              alert(info.message);
+            } else console.log(info);
+          });
+      })
+      .catch(function (error) {
+        console.log(error);
       });
+    // fetch(recipeUrl, {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: "Bearer " + token,
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     title: title,
+    //     category: category,
+    //     prepTime: prepTime,
+    //     numberOfPeople: numberOfPeople,
+    //     description: description,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.error) {
+    //       alert(data.message);
+    //     } else console.log(data);
+    //   });
   };
 
   return (
     <div id="create-recipe">
       <form onSubmit={handleSubmit}>
+        <input
+          type="file"
+          accept="image/*"
+          name="foo"
+          onChange={changeHandler}
+        />
         <input
           type="string"
           placeholder="enter title"

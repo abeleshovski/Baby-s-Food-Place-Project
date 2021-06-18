@@ -1,0 +1,36 @@
+.login {
+  display: flex;
+  width: 80%;
+}
+
+.loginMessage {
+  display: inline-block;
+  width: 65%;
+  padding: 150px;
+}
+
+.loginMessage h1 {
+  color: orange;
+  margin: 5px;
+}
+
+.loginMessage h1 span {
+  color: #626262;
+}
+
+.loginMessage p {
+  color: #a5a5a5;
+  font-size: 15px;
+}
+
+.loginForm {
+  display: inline-block;
+  width: 35%;
+  padding: 20px;
+}
+
+.loginForm input {
+  display: block;
+  padding: 5px;
+  margin: 10px;
+}

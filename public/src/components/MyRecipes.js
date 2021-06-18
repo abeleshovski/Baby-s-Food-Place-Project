@@ -2,17 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContextProvider";
 import Cookies from "universal-cookie";
 import { Link } from "react-router-dom";
-import { ListOfRecipes } from "./handler/ListOfRecipes";
+import { ListOfRecipes } from "./handler/ListOfUserRecipes";
 
 export const MyRecipes = () => {
-  const cookies = new Cookies();
-  const id = cookies.get("id");
   const { loggedIn } = useContext(AuthContext);
-  const url = `http://${process.env.REACT_APP_API_URL}/recipes/${id}`;
 
   const [recipes, setRecipes] = useState([]);
 
   useEffect(async () => {
+    const cookies = new Cookies();
+    const id = cookies.get("id");
+    const url = `http://${process.env.REACT_APP_API_URL}/recipes/fetch/${id}`;
     await fetch(url, {
       headers: {
         Authorization: `Bearer ${cookies.get("token")}`,

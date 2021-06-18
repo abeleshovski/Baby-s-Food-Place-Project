@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "../style/register.css";
 
 export function Register() {
   const [firstName, setFirstName] = useState("");
