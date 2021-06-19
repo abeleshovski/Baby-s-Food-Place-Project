@@ -49,7 +49,7 @@ module.exports = {
         recipe,
       });
     } catch (error) {
-      res.status(400).send({
+      res.status(404).send({
         error: true,
         messege: error,
       });
@@ -75,7 +75,7 @@ module.exports = {
       });
     }
   },
-  postUpdate: async (req, res) => {
+  postUserUpdate: async (req, res) => {
     try {
       if (
         !req.body.password ||
@@ -124,5 +124,50 @@ module.exports = {
       user,
       //recipe
     });
+  },
+  dislikeRecipe: async (req, res) => {
+    try {
+      const likeCounter = await Recipes.findById(req.params.id);
+      const recipe = await Recipes.findByIdAndUpdate(
+        req.params.id,
+        { likes: likeCounter.likes + -1 },
+        { new: true }
+      );
+      res.status(201).send({
+        error: false,
+        message: `Recipe with id ${req.params.id} liked`,
+        recipe,
+      });
+    } catch (err) {
+      res.status(500).send({
+        error: true,
+        message: err,
+      });
+    }
+  },
+  postRecipeUpdate: async (req, res) => {
+    try {
+      const recipe = await Recipes.findOne(req.params.id);
+      const updatedRecipe = await recipe.update(req.body, {
+        new: true,
+        runValidators: true,
+        context: "query",
+      });
+
+      res.status(201).send({
+        messege: "success",
+        error: false,
+        updatedRecipe,
+      });
+    } catch (error) {
+      res.status(400).send({
+        messege: error,
+        error: true,
+      });
+    }
+  },
+  deleteRecipe: async (req, res) => {
+    await Recipes.deleteOne({ _id: req.params._id });
+    res.redirect("/");
   },
 };

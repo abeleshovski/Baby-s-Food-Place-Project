@@ -8,6 +8,8 @@ router
   .get("/fetch/:id", controller.fetchOne)
   .get("/users", controller.fetchAllUsers)
   .get("/users/:id", controller.fetchOneUser)
-  .post("/update/:id", controller.postUpdate)
-  .patch("/:id/like", controller.likeRecipe);
+  .post("/update/:id", controller.postUserUpdate)
+  .patch("/:id/like", controller.likeRecipe)
+  .patch("/:id/dislike", controller.dislikeRecipe)
+  .delete("/delete/:_id", controller.deleteRecipe);
 module.exports = router;

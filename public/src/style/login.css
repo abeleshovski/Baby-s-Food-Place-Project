@@ -1,12 +1,19 @@
+#loginName {
+  margin-left: 7%;
+  margin-top: 3%;
+  width: 100%;
+}
+
 .login {
   display: flex;
-  width: 80%;
+  margin-left: 3%;
+  margin-top: 7%;
+  justify-content: space-between;
 }
 
 .loginMessage {
   display: inline-block;
-  width: 65%;
-  padding: 150px;
+  width: 50%;
 }
 
 .loginMessage h1 {
@@ -20,13 +27,13 @@
 
 .loginMessage p {
   color: #a5a5a5;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .loginForm {
-  display: inline-block;
+  margin-top: 5%;
+  display: block;
   width: 35%;
-  padding: 20px;
 }
 
 .loginForm input {

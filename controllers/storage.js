@@ -2,23 +2,6 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = {
-  fetch: (req, res) => {
-    const storageDirectory = path.join(
-      __dirname,
-      "..",
-      "uploads",
-      req.params.id
-    );
-
-    if (!fs.existsSync(`${storageDirectory}/${req.params.filename}`)) {
-      return res.status(404).send({
-        error: true,
-        message: "File not found!",
-      });
-    }
-
-    res.download(`${storageDirectory}/${req.params.filename}`);
-  },
   upload: (req, res) => {
     const file = req.files.image;
     const maxFileSize = 5 * 1024 * 1024; // 5 MB
@@ -43,7 +26,7 @@ module.exports = {
       fs.mkdirSync(uploadsDirectory);
     }
 
-    const storageDirectory = path.join(__dirname, "..", "uploads", req.user.id);
+    const storageDirectory = path.join(__dirname, "..", "uploads");
     if (!fs.existsSync(storageDirectory)) {
       fs.mkdirSync(storageDirectory);
     }
@@ -59,7 +42,7 @@ module.exports = {
     });
   },
   delete: (req, res) => {
-    const storageDirectory = path.join(__dirname, "..", "uploads", req.user.id);
+    const storageDirectory = path.join(__dirname, "..", "uploads");
     const file = `${storageDirectory}/${req.params.filename}`;
 
     if (!fs.existsSync(file)) {

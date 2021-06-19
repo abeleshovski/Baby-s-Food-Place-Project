@@ -1,0 +1,33 @@
+.blocky {
+  display: block;
+}
+
+.home {
+  display: flex;
+  margin-left: 10%;
+  justify-content: space-evenly;
+  margin-bottom: 7%;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+}
+
+h1 {
+  color: #96bb36;
+}
+
+.fresh {
+  display: block;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.popular {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+}
+
+.popular > div {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}

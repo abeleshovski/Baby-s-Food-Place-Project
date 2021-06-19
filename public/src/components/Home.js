@@ -1,31 +1,37 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Cookies from "universal-cookie";
 import { ListOfAllRecipes } from "./handler/ListOfAllRecipes";
+import "../style/home.css";
 
 export function Home() {
-  const cookies = new Cookies();
-  const token = cookies.get("token");
-  const id = cookies.get("id");
-  const url = `http://${process.env.REACT_APP_API_URL}/misc/fresh`;
-  const storageUrl = `http://${process.env.REACT_APP_API_URL}/storage/new`;
+  const url = `http://${process.env.REACT_APP_API_URL}/misc`;
+
   const [freshRecipes, setFreshRecipes] = useState([]);
+  const [popularRecipes, setPopularRecipes] = useState([]);
 
   useEffect(() => {
     axios
-      .get(url)
+      .get(`${url}/fresh`)
       .then(({ data }) => {
         setFreshRecipes(data.fresh);
-        axios.get();
       })
       .catch((err) => console.log(err));
+    axios.get(`${url}/popular`).then(({ data }) => {
+      setPopularRecipes(data.popular);
+    });
   }, []);
 
   return (
-    <div>
-      <div>
-        <h1>Fresh and New</h1>
-        <ListOfAllRecipes recipes={freshRecipes} />
+    <div className="home">
+      <div className="blocky">
+        <div className="fresh">
+          <h1>Fresh and New</h1>
+          <ListOfAllRecipes recipes={freshRecipes} />
+        </div>
+        <div className="popular">
+          <h1>Popular</h1>
+          <ListOfAllRecipes recipes={popularRecipes} />
+        </div>
       </div>
     </div>
   );

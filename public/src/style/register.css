@@ -1,26 +1,57 @@
-body{
-  background-color: rgb(228, 230, 230);
-
+.register {
+  display: flex;
+  margin-top: 4%;
+  margin-left: 2%;
+  justify-content: space-between;
 }
 
-.Account{
-
+#registerName {
+  margin-top: 3%;
+  margin-left: 3%;
+  width: 100%;
 }
 
-.account-div{
+.registerMessage {
   display: inline-block;
-
+  width: 40%;
 }
 
-.account-div1{
-  display: inline-block;
-  width: 35%;
-  padding: 80px ;
-
+.registerMessage h1 {
+  color: orange;
+  margin: 5px;
 }
 
-.account-div2{
-  display: inline-block;
-  width: 65%;
-  padding: 30px;
+.registerMessage h1 span {
+  color: #626262;
+}
+
+.registerMessage p {
+  color: #a5a5a5;
+  font-size: 12px;
+}
+
+.registerForm form {
+  margin-top: 3%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 70%;
+}
+
+.registerForm label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #f0972a;
+}
+
+.registerForm input {
+  height: 30px;
+  border-radius: 5px;
+  border: 0.1px solid;
+  background-color: rgb(240, 240, 240);
+}
+
+.registerForm form button {
+  margin: 5px;
+  padding: 5px;
+  width: 170px;
 }

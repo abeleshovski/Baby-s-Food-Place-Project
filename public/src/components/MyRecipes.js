@@ -1,11 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContextProvider";
 import Cookies from "universal-cookie";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { ListOfRecipes } from "./handler/ListOfUserRecipes";
+import "../style/myRecipes.css";
+import plus from "../assets/images/icon_plus_white.svg";
 
 export const MyRecipes = () => {
   const { loggedIn } = useContext(AuthContext);
+
+  const history = useHistory();
 
   const [recipes, setRecipes] = useState([]);
 
@@ -28,8 +32,12 @@ export const MyRecipes = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const newRecipe = (e) => {
+    history.push("/newrecipe");
+  };
+
   return (
-    <div id="myrecipes">
+    <div className="myrecipes">
       {!loggedIn && (
         <div>
           <h2>You need to log in to see your recipes</h2>
@@ -37,11 +45,23 @@ export const MyRecipes = () => {
       )}
       {loggedIn && (
         <div>
-          <h2>My recipes</h2>
-          <h3>
-            <Link to="/newrecipe">Add Recipe</Link>
-          </h3>
-          <ListOfRecipes recipes={recipes} />
+          <div id="addRecipe">
+            <h2>My recipes</h2>
+            <img src={plus} onClick={newRecipe} id="plus" alt=""></img>
+          </div>
+          <div>
+            <div id="sbeve">
+              <span id="item">Recipe name</span>
+              <div id="item2">
+                <span>Category</span>
+                <div id="item3">
+                  <span>Created At</span>
+                  <span>Delete</span>
+                </div>
+              </div>
+            </div>
+            <ListOfRecipes recipes={recipes} />
+          </div>
         </div>
       )}
     </div>

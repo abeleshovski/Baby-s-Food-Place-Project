@@ -1,11 +1,14 @@
 const Recipes = require("../models/recipe");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   fresh: async (req, res) => {
     // assume try catch
     try {
       const recipes = await Recipes.find();
-      const fresh = recipes.reverse();
+      const reversed = recipes.reverse();
+      const fresh = await reversed.slice(0, 3);
       res.status(200).send({
         error: false,
         message: "All Recipes are fetched",
@@ -27,7 +30,19 @@ module.exports = {
     res.status(200).send({
       error: false,
       message: "Most Popular Fetched",
-      recipes: popular,
+      popular,
     });
+  },
+  images: (req, res) => {
+    const storageDirectory = path.join(__dirname, "..", "uploads");
+
+    if (!fs.existsSync(`${storageDirectory}/${req.params.filename}`)) {
+      return res.status(404).send({
+        error: true,
+        message: "File not found!",
+      });
+    }
+
+    res.download(`${storageDirectory}/${req.params.filename}`);
   },
 };

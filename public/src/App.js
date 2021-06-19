@@ -10,6 +10,7 @@ import Cookies from "universal-cookie";
 import { MyRecipes } from "./components/MyRecipes";
 import { CreateRecipe } from "./components/CreateRecipe";
 import { Footer } from "./components/Footer";
+import "./App.css";
 
 export default function App() {
   const cookies = new Cookies();
@@ -31,8 +32,8 @@ export default function App() {
 
   return (
     <AuthContextProvider>
-      <Nav />
       {/* <Redirect from="/" to="/home"></Redirect> */}
+      <Nav />
       <div className="container">
         <Switch>
           <Route path="/home" component={Home}></Route>
@@ -43,7 +44,8 @@ export default function App() {
           <Route path="/newrecipe" component={CreateRecipe} />
         </Switch>
       </div>
-      <Footer />
+      <p id="mobile">Please use a pc...thanks</p>
+      <Footer id="footer" />
     </AuthContextProvider>
   );
 }

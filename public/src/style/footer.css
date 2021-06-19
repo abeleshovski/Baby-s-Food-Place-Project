@@ -1,7 +1,7 @@
 .footer {
   bottom: 0px;
   display: flex;
-  position: absolute;
+  bottom: 0;
   width: 100%;
   justify-content: space-around;
   align-items: center;
@@ -30,7 +30,7 @@
 
 .footer-second li {
   list-style: none;
-  padding: 3px;
+  padding: 20px;
 }
 
 .footer-second li a {

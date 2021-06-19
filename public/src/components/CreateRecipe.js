@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Cookies from "universal-cookie";
 import axios from "axios";
 export const CreateRecipe = () => {
   const recipeUrl = `http://${process.env.REACT_APP_API_URL}/recipes/newRecipe`;
   const storageUrl = `http://${process.env.REACT_APP_API_URL}/storage/new`;
-
+  const history = useHistory();
   const cookies = new Cookies();
   const token = cookies.get("token");
 
@@ -57,7 +58,10 @@ export const CreateRecipe = () => {
           .then((info) => {
             if (info.error) {
               alert(info.message);
-            } else console.log(info);
+            } else {
+              alert("Recipe Created");
+              history.push("/home");
+            }
           });
       })
       .catch(function (error) {

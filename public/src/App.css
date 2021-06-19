@@ -1,0 +1,34 @@
+.container {
+  top: 0;
+  margin-bottom: 7%;
+  margin-left: 7%;
+  width: 80%;
+}
+
+#mobile {
+  display: none;
+}
+
+.footer {
+  bottom: 0;
+  position: fixed;
+}
+
+@media only screen and (max-width: 600px) {
+  #mobile {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-self: center;
+    font-size: 30px;
+  }
+  .navbar {
+    display: none;
+  }
+  .container {
+    display: none;
+  }
+  .footer {
+    display: none;
+  }
+}
