@@ -45,4 +45,21 @@ module.exports = {
 
     res.download(`${storageDirectory}/${req.params.filename}`);
   },
+  fetchOne: async (req, res) => {
+    // assume try catch
+    try {
+      const recipe = await Recipes.findById(req.params.id);
+
+      res.status(200).send({
+        error: false,
+        message: `Recipe with id #${req.params.id} fetched`,
+        recipe,
+      });
+    } catch (err) {
+      res.status(404).send({
+        error: true,
+        message: err,
+      });
+    }
+  },
 };

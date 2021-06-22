@@ -1,0 +1,55 @@
+#specificRecipe {
+  display: flex;
+  position: absolute;
+  left: 24%;
+  top: 13%;
+  justify-content: space-evenly;
+  width: 50%;
+  background: #fff;
+  border: 1px solid silver;
+  border-radius: 1px;
+  padding: 2px;
+}
+
+#specificRecipe h2 {
+  display: block;
+  color: orange;
+}
+
+#left {
+  display: inline;
+  width: 250px;
+}
+
+#specificImage {
+  width: 250px;
+  height: 250px;
+}
+
+#right {
+  display: inline;
+  width: 400px;
+  text-align: justify;
+  margin-top: 1%;
+}
+
+#specificRecipe h3 {
+  display: inline-block;
+}
+
+#left h4 {
+  display: inline-block;
+  color: #8ebf42;
+}
+
+#specificRecipe #category {
+  background: #8ebf42;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#what {
+  display: flex;
+  justify-content: space-between;
+}

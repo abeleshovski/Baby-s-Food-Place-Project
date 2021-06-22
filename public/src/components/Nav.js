@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import "../style/nav.css";
 import logo from "../assets/images/logo_color.svg";
 import AuthContext from "../context/AuthContextProvider";
+import Cookies from "universal-cookie";
 
 export const Nav = () => {
   const { loggedIn } = useContext(AuthContext);
+  const cookies = new Cookies();
+
   return (
     <nav className="navbar">
       <Link to={"/home"}>

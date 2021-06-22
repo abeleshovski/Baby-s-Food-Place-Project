@@ -11,6 +11,7 @@ import { MyRecipes } from "./components/MyRecipes";
 import { CreateRecipe } from "./components/CreateRecipe";
 import { Footer } from "./components/Footer";
 import "./App.css";
+import { SpecificRecipe } from "./components/SpecificRecipe.js";
 
 export default function App() {
   const cookies = new Cookies();
@@ -42,6 +43,10 @@ export default function App() {
           <Route path="/myprofile" component={MyProfile}></Route>
           <Route path="/myrecipes" component={MyRecipes} />
           <Route path="/newrecipe" component={CreateRecipe} />
+          <Route
+            path={`/${cookies.get("recipeId")}`}
+            component={SpecificRecipe}
+          ></Route>
         </Switch>
       </div>
       <p id="mobile">Please use a pc...thanks</p>

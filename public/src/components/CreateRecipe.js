@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "universal-cookie";
 import axios from "axios";
+import "../style/createRecipe.css";
+import placeholder from "../assets/images/text.svg";
+
 export const CreateRecipe = () => {
   const recipeUrl = `http://${process.env.REACT_APP_API_URL}/recipes/newRecipe`;
   const storageUrl = `http://${process.env.REACT_APP_API_URL}/storage/new`;
@@ -14,12 +17,14 @@ export const CreateRecipe = () => {
   const [prepTime, setPrepTime] = useState("");
   const [numberOfPeople, setNumberOfPeople] = useState("");
   const [description, setDescription] = useState("");
-  const [imageName, setImageName] = useState("");
+  const [preview, setPreview] = useState({ preview: "" });
   const [selectedFile, setSelectedFile] = useState();
+  const [imageName, setImageName] = useState("");
 
   const changeHandler = (event) => {
     const image = event.target.files[0];
     setSelectedFile(image);
+    setPreview({ preview: URL.createObjectURL(image) });
     console.log(image);
   };
 
@@ -93,49 +98,84 @@ export const CreateRecipe = () => {
   return (
     <div id="create-recipe">
       <form onSubmit={handleSubmit}>
-        <input
-          type="file"
-          accept="image/*"
-          name="foo"
-          onChange={changeHandler}
-        />
-        <input
-          type="string"
-          placeholder="enter title"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-        />
-        <select
-          id="category"
-          value={category}
-          onChange={(event) => {
-            const typeOfFood = event.target.value;
-            setCategory(typeOfFood);
-          }}
-        >
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-        </select>
-        <input
-          type="number"
-          placeholder="Enter prep time"
-          value={prepTime}
-          onChange={(event) => setPrepTime(event.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Enter number of people"
-          value={numberOfPeople}
-          onChange={(event) => setNumberOfPeople(event.target.value)}
-        />
-        <input
-          type="string"
-          placeholder="Enter description"
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-        />
-        <button type="submit">Post Recipe</button>
+        <div id="imgContainer">
+          <span>Recipe Image</span>
+          {!preview.preview && (
+            <img src={placeholder} id="placeholderImg" alt=""></img>
+          )}
+          {preview.preview && <img src={preview.preview} alt=""></img>}
+          <label class="button" for="upload">
+            Upload File
+          </label>
+          <input
+            id="upload"
+            type="file"
+            accept="image/*"
+            name="foo"
+            onChange={changeHandler}
+          />
+        </div>
+        <div id="otherContainer">
+          <div id="otherContainer">
+            <div id="titleWrapper">
+              <span>Title</span>
+              <input
+                type="text"
+                placeholder="enter title"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+              />
+            </div>
+            <div id="categoryWrapper">
+              <span>Category</span>
+              <select
+                id="category"
+                value={category}
+                onChange={(event) => {
+                  const typeOfFood = event.target.value;
+                  setCategory(typeOfFood);
+                }}
+              >
+                <option value="breakfast">Breakfast</option>
+                <option value="brunch">Brunch</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+              </select>
+            </div>
+            <div id="prepTimeWrapper">
+              <span>Prep Time</span>
+              <input
+                type="number"
+                placeholder="Enter prep time"
+                value={prepTime}
+                min="0"
+                onChange={(event) => setPrepTime(event.target.value)}
+              />
+            </div>
+            <div id="numberOfPeopleWrapper">
+              <span>Number of People</span>
+              <input
+                type="number"
+                placeholder="Enter number of people"
+                min="0"
+                value={numberOfPeople}
+                onChange={(event) => setNumberOfPeople(event.target.value)}
+              />
+            </div>
+          </div>
+          <div id="descriptionContainer">
+            <span>Description</span>
+            <textarea
+              placeholder="Enter description"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+            />
+          </div>
+        </div>
+
+        <button id="submitButton" type="submit">
+          Post Recipe
+        </button>
       </form>
     </div>
   );

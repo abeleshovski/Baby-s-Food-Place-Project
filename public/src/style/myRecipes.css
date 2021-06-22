@@ -14,10 +14,11 @@
 
 #plus {
   border-radius: 50%;
+  width: 30px;
+  height: 30px;
   padding: 5px;
+  bottom: 0;
   background: orange;
-  padding-left: 7px;
-  padding-right: 7px;
 }
 
 #item2 {
