@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import time from "../assets/images/icon_time.svg";
@@ -10,11 +9,10 @@ import { useHistory } from "react-router-dom";
 
 export const SpecificRecipe = () => {
   const cookies = new Cookies();
-  const token = cookies.get("token");
   const url = `http://${
     process.env.REACT_APP_API_URL
-  }/misc/specific/${cookies.get("recipeId")}`;
-  const storageUrl = `http://${process.env.REACT_APP_API_URL}/misc`;
+  }/api/misc/specific/${cookies.get("recipeId")}`;
+  const storageUrl = `http://${process.env.REACT_APP_API_URL}/api/misc`;
 
   const [recipe, setRecipe] = useState();
   const [imageName, setImageName] = useState("");
@@ -77,7 +75,7 @@ export const SpecificRecipe = () => {
             <div id="what">
               <h4>Recipe Details</h4>
               <h4 id="escape" onClick={() => history.push("/home")}>
-                <img src={exit}></img>
+                <img src={exit} alt=""></img>
               </h4>
             </div>
             <p>{recipe.description}</p>

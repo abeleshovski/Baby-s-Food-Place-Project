@@ -6,8 +6,8 @@ import "../style/createRecipe.css";
 import placeholder from "../assets/images/text.svg";
 
 export const CreateRecipe = () => {
-  const recipeUrl = `http://${process.env.REACT_APP_API_URL}/recipes/newRecipe`;
-  const storageUrl = `http://${process.env.REACT_APP_API_URL}/storage/new`;
+  const recipeUrl = `http://${process.env.REACT_APP_API_URL}/api/recipes/newRecipe`;
+  const storageUrl = `http://${process.env.REACT_APP_API_URL}/api/storage/new`;
   const history = useHistory();
   const cookies = new Cookies();
   const token = cookies.get("token");
@@ -72,27 +72,6 @@ export const CreateRecipe = () => {
       .catch(function (error) {
         console.log(error);
       });
-    // fetch(recipeUrl, {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: "Bearer " + token,
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     title: title,
-    //     category: category,
-    //     prepTime: prepTime,
-    //     numberOfPeople: numberOfPeople,
-    //     description: description,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.error) {
-    //       alert(data.message);
-    //     } else console.log(data);
-    //   });
   };
 
   return (
@@ -104,7 +83,7 @@ export const CreateRecipe = () => {
             <img src={placeholder} id="placeholderImg" alt=""></img>
           )}
           {preview.preview && <img src={preview.preview} alt=""></img>}
-          <label class="button" for="upload">
+          <label className="button" for="upload">
             Upload File
           </label>
           <input
@@ -116,7 +95,7 @@ export const CreateRecipe = () => {
           />
         </div>
         <div id="otherContainer">
-          <div id="otherContainer">
+          <div>
             <div id="titleWrapper">
               <span>Title</span>
               <input

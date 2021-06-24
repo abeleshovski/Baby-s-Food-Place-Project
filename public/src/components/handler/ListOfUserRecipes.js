@@ -3,16 +3,14 @@ import "../../style/userRecipes.css";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import trash from "../../assets/images/icon_trashcan.svg";
-import { useHistory } from "react-router-dom";
 
 export const ListOfRecipes = (props) => {
   const recipesList = props.recipes.length ? (
     props.recipes.map((recipe, id) => {
       const cookies = new Cookies();
-      const history = useHistory();
       console.log(recipe._id);
       const token = cookies.get("token");
-      const deleteUrl = `http://${process.env.REACT_APP_API_URL}/recipes/delete/${recipe._id}`;
+      const deleteUrl = `http://${process.env.REACT_APP_API_URL}/api/recipes/delete/${recipe._id}`;
       const deleteRecipe = () => {
         axios
           .delete(deleteUrl, {

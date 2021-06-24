@@ -12,14 +12,13 @@ export const ListOfAllRecipes = (props) => {
     props.recipes.map((recipe, id) => {
       const [likes, setLikes] = useState(`${recipe.likes}`);
       const [isLiked, setIsLiked] = useState(false);
-      const [showRecipe, setShowRecipe] = useState(false);
 
-      const storageUrl = `http://${process.env.REACT_APP_API_URL}/misc`;
+      const storageUrl = `http://${process.env.REACT_APP_API_URL}/api/misc`;
 
       const imageUrl = `${storageUrl}/${recipe.imageName}`;
 
       const cookies = new Cookies();
-      const url = `http://${process.env.REACT_APP_API_URL}/recipes/${recipe._id}`;
+      const url = `http://${process.env.REACT_APP_API_URL}/api/recipes/${recipe._id}`;
       const token = cookies.get("token");
 
       const handleLike = (e) => {
@@ -58,10 +57,6 @@ export const ListOfAllRecipes = (props) => {
 
       const truncate = (str, n) => {
         return str.length > n ? str.substring(0, n - 1) + "..." : str;
-      };
-
-      const clickRecipe = () => {
-        setShowRecipe(true);
       };
 
       return (
@@ -125,7 +120,7 @@ export const ListOfAllRecipes = (props) => {
       );
     })
   ) : (
-    <p>There seem to be no recipes atm</p>
+    <p></p>
   );
   return <div className="recipes collection">{recipesList}</div>;
 };

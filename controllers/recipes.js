@@ -1,6 +1,7 @@
 const Recipes = require("../models/recipe");
 const User = require("../models/user");
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 mongoose.set("useFindAndModify", false);
 
 module.exports = {
@@ -86,6 +87,7 @@ module.exports = {
           message: "Bad request. Passwords do not match.",
         });
       }
+      req.body.password = bcrypt.hashSync(req.body.password);
       const user = await User.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,

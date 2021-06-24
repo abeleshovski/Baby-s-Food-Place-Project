@@ -16,7 +16,7 @@ export const MyRecipes = () => {
   useEffect(async () => {
     const cookies = new Cookies();
     const id = cookies.get("id");
-    const url = `http://${process.env.REACT_APP_API_URL}/recipes/fetch/${id}`;
+    const url = `http://${process.env.REACT_APP_API_URL}/api/recipes/fetch/${id}`;
     await fetch(url, {
       headers: {
         Authorization: `Bearer ${cookies.get("token")}`,

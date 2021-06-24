@@ -12,7 +12,8 @@ export function Register() {
 
   let history = useHistory();
 
-  const url = `http://${process.env.REACT_APP_API_URL}/auth/register`;
+  const url = `http://${process.env.REACT_APP_API_URL}/api/auth/register`;
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,6 +111,7 @@ export function Register() {
               <label for="DOB">Date of Birth</label>
               <br />
               <input
+              min='1930-01-01' max='2014-01-01'
                 name="DOB"
                 type="date"
                 placeholder="XX-XX-XXXX"
@@ -132,8 +134,8 @@ export function Register() {
               <label for="conf_password">Confirm Password</label>
               <br />
               <input
-                name="passowrd"
-                type="conf_password"
+                name="conf_password"
+                type="password"
                 placeholder="Enter Password"
                 value={confPassword}
                 onChange={(e) => setConfPassword(e.target.value)}

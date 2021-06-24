@@ -6,5 +6,7 @@ router
   .get("/fresh/", controller.fresh)
   .get("/popular/", controller.popular)
   .get("/:filename", controller.images)
-  .get("/specific/:id", controller.fetchOne);
+  .get("/specific/:id", controller.fetchOne)
+  .get("/", controller.fetchAll)
+  .get("/getAvatar/:filename", controller.getAvatar);
 module.exports = router;

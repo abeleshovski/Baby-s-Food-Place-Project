@@ -12,12 +12,16 @@ import { CreateRecipe } from "./components/CreateRecipe";
 import { Footer } from "./components/Footer";
 import "./App.css";
 import { SpecificRecipe } from "./components/SpecificRecipe.js";
+import { Breakfast } from "./components/Breakfast";
+import { Brunch } from "./components/Brunch";
+import { Lunch } from "./components/Lunch";
+import { Dinner } from "./components/Dinner";
 
 export default function App() {
   const cookies = new Cookies();
   const token = cookies.get("token");
 
-  const refresh = `http://${process.env.REACT_APP_API_URL}/auth/refresh-token`;
+  const refresh = `http://${process.env.REACT_APP_API_URL}/api/auth/refresh-token`;
 
   useEffect(() => {
     fetch(refresh, {
@@ -33,7 +37,6 @@ export default function App() {
 
   return (
     <AuthContextProvider>
-      {/* <Redirect from="/" to="/home"></Redirect> */}
       <Nav />
       <div className="container">
         <Switch>
@@ -47,6 +50,10 @@ export default function App() {
             path={`/${cookies.get("recipeId")}`}
             component={SpecificRecipe}
           ></Route>
+          <Route path="/breakfast" component={Breakfast} />
+          <Route path="/brunch" component={Brunch} />
+          <Route path="/lunch" component={Lunch} />
+          <Route path="/dinner" component={Dinner} />
         </Switch>
       </div>
       <p id="mobile">Please use a pc...thanks</p>

@@ -4,7 +4,7 @@ import { ListOfAllRecipes } from "./handler/ListOfAllRecipes";
 import "../style/home.css";
 
 export function Home() {
-  const url = `http://${process.env.REACT_APP_API_URL}/misc`;
+  const url = `http://${process.env.REACT_APP_API_URL}/api/misc`;
 
   const [freshRecipes, setFreshRecipes] = useState([]);
   const [popularRecipes, setPopularRecipes] = useState([]);

@@ -10,7 +10,7 @@ export function Login() {
 
   const history = useHistory();
 
-  const url = `http://${process.env.REACT_APP_API_URL}/auth/login`;
+  const url = `http://${process.env.REACT_APP_API_URL}/api/auth/login`;
   function handleSubmit(e) {
     e.preventDefault();
 

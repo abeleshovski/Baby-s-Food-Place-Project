@@ -34,7 +34,7 @@ module.exports = {
     });
   },
   images: (req, res) => {
-    const storageDirectory = path.join(__dirname, "..", "uploads");
+    const storageDirectory = path.join(__dirname, "..", "uploads", "recipes");
 
     if (!fs.existsSync(`${storageDirectory}/${req.params.filename}`)) {
       return res.status(404).send({
@@ -61,5 +61,33 @@ module.exports = {
         message: err,
       });
     }
+  },
+  fetchAll: async (req, res) => {
+    // assume try catch
+    try {
+      const recipes = await Recipes.find();
+      res.status(200).send({
+        error: false,
+        message: "All Recipes are fetched",
+        recipes,
+      });
+    } catch (error) {
+      res.status(400).send({
+        error: true,
+        messege: "Could not fetch Recipes",
+      });
+    }
+  },
+  getAvatar: (req, res) => {
+    const storageDirectory = path.join(__dirname, "..", "uploads", "avatar");
+
+    if (!fs.existsSync(`${storageDirectory}/${req.params.filename}`)) {
+      return res.status(404).send({
+        error: true,
+        message: "File not found!",
+      });
+    }
+
+    res.download(`${storageDirectory}/${req.params.filename}`);
   },
 };

@@ -21,7 +21,9 @@ const userSchema = mongoose.Schema({
     type: String,
     required: ["Password is required"],
   },
-  
+  avatar: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema, "users");

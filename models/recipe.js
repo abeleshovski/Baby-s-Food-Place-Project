@@ -34,6 +34,7 @@ const recipeSchema = mongoose.Schema({
   },
   imageName: {
     type: String,
+    required: ["Must have image"],
   },
   usersThatLiked: {
     type: String,
