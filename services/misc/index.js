@@ -11,9 +11,11 @@ api.use(cors());
 
 api.use("/api/misc", router);
 
-api.listen(config.get("ports").misc, (err) => {
+const PORT = process.env.PORT || config.get("ports").misc;
+
+api.listen(PORT, (err) => {
   if (err) {
     return console.log("Error happened while starting the misc service: ", err);
   }
-  console.log("Misc service started on port", config.get("ports").misc);
+  console.log("Misc service started on port", PORT);
 });

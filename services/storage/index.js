@@ -27,15 +27,14 @@ api.use(upload());
 
 api.use("/api/storage", router);
 
-api.listen(config.get("ports").storage, (err) => {
+const PORT = process.env.PORT || config.get("ports").storage;
+
+api.listen(PORT, (err) => {
   if (err) {
     return console.log(
       "Error happened while starting the storage service: ",
       err
     );
   }
-  console.log(
-    "Storage service successfully started on port",
-    config.get("ports").storage
-  );
+  console.log("Storage service successfully started on port", PORT);
 });

@@ -37,15 +37,14 @@ api.use(function (req, res, next) {
 
 api.use("/api/recipes", router);
 
-api.listen(config.get("ports").recipes, (err) => {
+const PORT = process.env.PORT || config.get("ports").recipes;
+
+api.listen(PORT, (err) => {
   if (err) {
     return console.log(
       "Error happened while starting the storage service: ",
       err
     );
   }
-  console.log(
-    "Recipe service successfully started on port",
-    config.get("ports").recipes
-  );
+  console.log("Recipe service successfully started on port", PORT);
 });

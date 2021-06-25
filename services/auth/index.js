@@ -36,9 +36,11 @@ api.use((err, req, res, next) => {
 
 api.use("/api/auth", router);
 
-api.listen(config.get("ports").auth, (err) => {
+const PORT = process.env.PORT || config.get("ports").auth;
+
+api.listen(PORT, (err) => {
   if (err) {
     return console.log("Error happened while starting the auth service: ", err);
   }
-  console.log("Auth service started on port", config.get("ports").auth);
+  console.log("Auth service started on port", PORT);
 });
