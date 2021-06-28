@@ -2,13 +2,14 @@
   display: flex;
   position: absolute;
   left: 24%;
-  top: 13%;
+  top: 8%;
   justify-content: space-evenly;
   width: 50%;
+  height: 80%;
   background: #fff;
   border: 1px solid silver;
   border-radius: 1px;
-  padding: 2px;
+  padding: 5px;
 }
 
 #specificRecipe h2 {
@@ -52,4 +53,9 @@
 #what {
   display: flex;
   justify-content: space-between;
+}
+
+#specificRecipe .leftSide {
+  bottom: 0;
+  position: absolute;
 }

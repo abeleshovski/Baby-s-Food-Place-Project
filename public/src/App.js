@@ -39,6 +39,7 @@ export default function App() {
     <AuthContextProvider>
       <Nav />
       <div className="container">
+        <Redirect from="/" to="/home" />
         <Switch>
           <Route path="/home" component={Home}></Route>
           <Route path="/register" component={Register}></Route>
