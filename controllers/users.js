@@ -1,4 +1,7 @@
 const User = require("../models/user");
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+mongoose.set("useFindAndModify", false);
 
 module.exports = {
   postUserUpdate: async (req, res) => {
