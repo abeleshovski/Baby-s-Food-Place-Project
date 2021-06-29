@@ -21,6 +21,7 @@ export const ListOfAllRecipes = (props) => {
       const url = `http://${process.env.REACT_APP_API_URL}/api/recipes/${recipe._id}`;
       const token = cookies.get("token");
 
+      //like button
       const handleLike = (e) => {
         if (!token) {
           alert("Please log in");
@@ -40,6 +41,7 @@ export const ListOfAllRecipes = (props) => {
           .catch((err) => console.log(err));
       };
 
+      //dislike button
       const handleDislike = (e) => {
         fetch(`${url}/dislike`, {
           method: "PATCH",
@@ -54,7 +56,7 @@ export const ListOfAllRecipes = (props) => {
             setIsLiked(false);
           });
       };
-
+      //shorten the string
       const truncate = (str, n) => {
         return str.length > n ? str.substring(0, n - 1) + "..." : str;
       };

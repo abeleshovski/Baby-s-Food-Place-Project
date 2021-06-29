@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ListOfAllRecipes } from "./handler/ListOfAllRecipes";
 import "../style/home.css";
 
-export function Home() {
+export const Home = () => {
   const url = `http://${process.env.REACT_APP_API_URL}/api/misc`;
 
   const [freshRecipes, setFreshRecipes] = useState([]);
@@ -35,4 +35,4 @@ export function Home() {
       </div>
     </div>
   );
-}
+};

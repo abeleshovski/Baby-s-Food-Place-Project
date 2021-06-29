@@ -19,7 +19,7 @@ export const CreateRecipe = () => {
   const [description, setDescription] = useState("");
   const [preview, setPreview] = useState({ preview: "" });
   const [selectedFile, setSelectedFile] = useState();
-  const [imageName, setImageName] = useState("");
+  const [details, setDetails] = useState("");
 
   const changeHandler = (event) => {
     const image = event.target.files[0];
@@ -42,7 +42,6 @@ export const CreateRecipe = () => {
       })
       .then(function (response) {
         console.log(response);
-        setImageName(response.data.fileName);
         fetch(recipeUrl, {
           method: "POST",
           headers: {
@@ -56,6 +55,7 @@ export const CreateRecipe = () => {
             prepTime: prepTime,
             numberOfPeople: numberOfPeople,
             description: description,
+            details: details,
             imageName: response.data.fileName,
           }),
         })
@@ -69,7 +69,7 @@ export const CreateRecipe = () => {
             }
           });
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -151,7 +151,14 @@ export const CreateRecipe = () => {
             />
           </div>
         </div>
-
+        <div id="details">
+          <span>Recipe Details</span>
+          <textarea
+            placeholder="Recipe Details"
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
+          ></textarea>
+        </div>
         <button id="submitButton" type="submit">
           Post Recipe
         </button>

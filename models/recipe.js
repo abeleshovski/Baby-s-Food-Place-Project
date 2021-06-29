@@ -21,6 +21,10 @@ const recipeSchema = mongoose.Schema({
     type: String,
     required: ["Must have a description"],
   },
+  details: {
+    type: String,
+    required: ["Must have details"],
+  },
   likes: {
     type: Number,
     default: 0,

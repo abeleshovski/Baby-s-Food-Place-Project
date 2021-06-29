@@ -47,7 +47,7 @@ export const SpecificRecipe = () => {
             <h2>{recipe.title}</h2>
             <img src={imageUrl} alt="" id="specificImage" />
             <div id="bottomRow">
-              <div id="what">
+              <div id="recipeInformation">
                 <h4>Best Server For</h4>
                 <span id="category">{recipe.category}</span>
               </div>
@@ -72,13 +72,16 @@ export const SpecificRecipe = () => {
             </div>
           </div>
           <div id="right">
-            <div id="what">
+            <div id="recipeInformation">
               <h4>Recipe Details</h4>
               <h4 id="escape" onClick={() => history.push("/home")}>
-                <img src={exit} alt=""></img>
+                <img src={exit} id="exit" alt=""></img>
               </h4>
             </div>
-            <p>{recipe.description}</p>
+            <div>
+              {recipe.details && <p>{recipe.details}</p>}
+              {!recipe.details && <p>{recipe.description}</p>}
+            </div>
           </div>
         </div>
       )}

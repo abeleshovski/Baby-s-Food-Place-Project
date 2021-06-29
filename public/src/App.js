@@ -10,7 +10,7 @@ import Cookies from "universal-cookie";
 import { MyRecipes } from "./components/MyRecipes";
 import { CreateRecipe } from "./components/CreateRecipe";
 import { Footer } from "./components/Footer";
-import "./App.css";
+import "./style/App.css";
 import { SpecificRecipe } from "./components/SpecificRecipe.js";
 import { Breakfast } from "./components/Breakfast";
 import { Brunch } from "./components/Brunch";
@@ -39,7 +39,7 @@ export default function App() {
     <AuthContextProvider>
       <Nav />
       <div className="container">
-        <Redirect from="/" to="/home" />
+        <Route exact path="/" render={() => <Redirect to="/home" />} />
         <Switch>
           <Route path="/home" component={Home}></Route>
           <Route path="/register" component={Register}></Route>

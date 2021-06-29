@@ -50,12 +50,27 @@
   padding: 5px;
 }
 
-#what {
+#recipeInformation {
   display: flex;
   justify-content: space-between;
+  text-align: center;
 }
 
 #specificRecipe .leftSide {
   bottom: 0;
   position: absolute;
+}
+
+#exit {
+  border-radius: 50%;
+  position: absolute;
+  top: 1%;
+  right: 2%;
+}
+
+#exit:hover {
+  background-color: gray;
+  border-radius: 50%;
+  transition: 0.1s ease-in-out;
+  color: white;
 }

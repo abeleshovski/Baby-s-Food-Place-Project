@@ -23,8 +23,8 @@ export function MyProfile() {
   const id = cookies.get("id");
   const token = cookies.get("token");
 
-  const fetchUrl = `http://${process.env.REACT_APP_API_URL}/api/recipes/users/${id}`;
-  const updateUrl = `http://${process.env.REACT_APP_API_URL}/api/recipes/update/${id}`;
+  const fetchUrl = `http://${process.env.REACT_APP_API_URL}/api/users/${id}`;
+  const updateUrl = `http://${process.env.REACT_APP_API_URL}/api/users/update/${id}`;
   const fetchAvatarUrl = `http://${process.env.REACT_APP_API_URL}/api/misc/getAvatar`;
   const postAvatarUrl = `http://${process.env.REACT_APP_API_URL}/api/storage/postAvatar`;
 

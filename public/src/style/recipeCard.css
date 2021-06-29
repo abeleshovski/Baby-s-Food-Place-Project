@@ -43,7 +43,8 @@ h4 {
   margin: 5px;
 }
 
-.iconz {
+.recipeCard .iconz {
+  position: relative;
   font-size: 12px;
   bottom: 0;
   margin: 1px;

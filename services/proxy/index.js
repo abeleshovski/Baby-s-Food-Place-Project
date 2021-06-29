@@ -45,6 +45,17 @@ app.use(
   })
 );
 
+app.use(
+  "/api/users",
+  proxy(`http://localhost:${config.get("ports").users}`, {
+    proxyReqPathResolver: (req) => {
+      return `http://localhost:${config.get("ports").users}/api/users${
+        req.url
+      }`;
+    },
+  })
+);
+
 app.use("/", express.static(`${__dirname}/../../public/build`));
 
 app.use(function (req, res, next) {

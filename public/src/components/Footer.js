@@ -45,7 +45,10 @@ export const Footer = () => {
   return (
     <div className="footer">
       <div className="footer-second">
-        <img src={WhiteLogo} alt="logo_white" className="logo_white" />
+        <Link to={"/home"} onClick={() => setHighlighted(false)}>
+          <img src={WhiteLogo} alt="logo_white" className="logo_white" />
+        </Link>
+
         {!highlighted && (
           <ul>
             <li>

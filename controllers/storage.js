@@ -61,7 +61,7 @@ module.exports = {
   },
   uploadAvatar: (req, res) => {
     const file = req.files.image;
-    const maxFileSize = 5 * 1024 * 1024; // 5 MB
+    const maxFileSize = 10 * 1024 * 1024; // 10 MB
     const allowedTypes = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
 
     if (!allowedTypes.includes(file.mimetype)) {

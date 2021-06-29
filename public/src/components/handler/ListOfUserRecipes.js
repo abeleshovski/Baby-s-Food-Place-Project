@@ -19,9 +19,12 @@ export const ListOfRecipes = (props) => {
             },
           })
           .then((res) => {
+            alert("Recipe Deleted");
             window.location.reload();
           })
           .catch((err) => {
+            //Theres an error in the backend that gives an error but still deletes it, so this is how we do it
+            alert("Recipe Deleted");
             window.location.reload();
           });
       };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../style/register.css";
 
-export function Register() {
+export const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +13,6 @@ export function Register() {
   let history = useHistory();
 
   const url = `http://${process.env.REACT_APP_API_URL}/api/auth/register`;
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,6 +41,7 @@ export function Register() {
         if (data.error) {
           alert(data.message);
         } else {
+          alert("User Registered");
           history.push("/login");
         }
       })
@@ -111,7 +111,8 @@ export function Register() {
               <label for="DOB">Date of Birth</label>
               <br />
               <input
-              min='1930-01-01' max='2014-01-01'
+                min="1930-01-01"
+                max="2014-01-01"
                 name="DOB"
                 type="date"
                 placeholder="XX-XX-XXXX"
@@ -141,10 +142,12 @@ export function Register() {
                 onChange={(e) => setConfPassword(e.target.value)}
               ></input>
             </div>
-            <button type="submit">Yeet</button>
+            <button type="submit" id="registerBtn">
+              Register
+            </button>
           </form>
         </div>
       </div>
     </div>
   );
-}
+};
